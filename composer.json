@@ -1,0 +1,25 @@
+{
+    "name": "barryvdh/laravel-assetic",
+    "description": "",
+    "authors": [
+        {
+            "name": "Barry vd. Heuvel",
+            "email": "barryvdh@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0",
+        "illuminate/support": "4.0.x",
+        "kriswallsmith/assetic": "~1.1",
+        "symfony/finder": "~2.3"
+    },
+    "suggest": {
+        "twig/twig": "~1.14"
+    },
+    "autoload": {
+        "psr-0": {
+            "Barryvdh\\Assetic": "src/"
+        }
+    },
+    "minimum-stability": "dev"
+}

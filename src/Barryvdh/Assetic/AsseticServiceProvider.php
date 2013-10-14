@@ -11,6 +11,7 @@ use Assetic\Factory\LazyAssetManager;
 use Assetic\Cache\FilesystemCache;
 use Assetic\Extension\Twig\TwigFormulaLoader;
 use Assetic\Extension\Twig\AsseticExtension;
+use Assetic\Factory\Worker\CacheBustingWorker;
 
 /**
  * Class AsseticServiceProvider
@@ -70,6 +71,11 @@ class AsseticServiceProvider extends ServiceProvider {
                 $factory = new AssetFactory($root, $app['assetic.options']['debug']);
                 $factory->setAssetManager($app['assetic.asset_manager']);
                 $factory->setFilterManager($app['assetic.filter_manager']);
+
+                if($app['config']->get('laravel-assetic::config.cachebusting')){
+                    $factory->addWorker(new CacheBustingWorker());
+                }
+
 
                 return $factory;
             });
@@ -155,6 +161,12 @@ class AsseticServiceProvider extends ServiceProvider {
                     return $helper;
                 });
         }
+
+        $app['command.assetic.build'] = $app->share(function($app)
+            {
+                return new Console\AsseticBuildCommand();
+            });
+        $this->commands('command.assetic.build');
 	}
 
     public function boot(){
@@ -190,7 +202,9 @@ class AsseticServiceProvider extends ServiceProvider {
 	 */
 	public function provides()
 	{
-		return array();
+		return array('assetic', 'assetic.factory', 'assetic.dumper', 'assetic.filters',
+            'assetic.asset_manager', 'assetic.filtermanager', 'assetic.lazy_asset_manager',
+            'assetic.asset_writer', 'command.assetic.build');
 	}
 
 }

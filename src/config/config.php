@@ -8,11 +8,16 @@ return array(
   | Assetic Options
   |--------------------------------------------------------------------------
   |
+  | Note: CacheBusting doesn't seem to work with seperate files yet.
+  | It works fine when debug is false.
+  |
   */
 
   'options' => array(
 
       'debug' => \Config::get('app.debug'),
+
+      'cachebusting' => \Config::get('app.debug'),
 
       'formulae_cache_dir' => storage_path().'/cache/assetic',
 

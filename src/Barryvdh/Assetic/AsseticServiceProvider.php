@@ -96,7 +96,14 @@ class AsseticServiceProvider extends ServiceProvider {
          * @return \Assetic\AssetManager
          */
         $app['assetic.asset_manager'] = $app->share(function () use ($app) {
-                return new AssetManager();
+                $am = new AssetManager();
+                if($app['config']->has('laravel-assetic::config.asset_manager')){
+                    $callback = $app['config']->get('laravel-assetic::config.asset_manager');
+                    if(is_callable($callback)){
+                        $callback($am);
+                    }
+                }
+                return $am;
             });
 
         /**
@@ -105,7 +112,16 @@ class AsseticServiceProvider extends ServiceProvider {
          * @return \Assetic\FilterManager
          */
         $app['assetic.filter_manager'] = $app->share(function () use ($app) {
-                return new FilterManager();
+                $fm = new FilterManager();
+
+                if($app['config']->has('laravel-assetic::config.filter_manager')){
+                    $callback = $app['config']->get('laravel-assetic::config.filter_manager');
+                    if(is_callable($callback)){
+                        $callback($fm);
+                    }
+                }
+
+                return $fm;
             });
 
         /**

@@ -11,6 +11,12 @@ use Assetic\Extension\Twig\TwigResource;
 
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\View\FileViewFinder ;
+
+/**
+ * Class Dumper
+ * @author mheap (Michael Heap)
+ * @source https://github.com/mheap/Silex-Assetic/blob/master/src/SilexAssetic/Assetic/Dumper.php
+ */
 class Dumper
 {
     /**

@@ -45,8 +45,8 @@ class AsseticServiceProvider extends ServiceProvider {
          */
         $app['assetic'] = $app->share(function () use ($app) {
                 $app['assetic.path_to_web'] = $app['config']->get('laravel-assetic::config.path_to_web');
-                if( $app['config']->has('assetic.path_to_source')){
-                    $app['assetic.path_to_source'] = $app['config']->get('laravel-assetic::config.path_to_source');
+                if( $app['config']->has('laravel-assetic::config.path_to_source')){
+                    $app['assetic.path_to_source'] = $app['config']->get('laravel-assetic::config.options.path_to_source');
                 }
                 $app['assetic.options'] = $app['config']->get('laravel-assetic::config.options');
 
@@ -72,7 +72,8 @@ class AsseticServiceProvider extends ServiceProvider {
                 $factory->setAssetManager($app['assetic.asset_manager']);
                 $factory->setFilterManager($app['assetic.filter_manager']);
 
-                if($app['config']->get('laravel-assetic::config.cachebusting')){
+
+                if($app['config']->get('laravel-assetic::config.cachebusting') and ! $app['assetic.options']['debug'] ){
                     $factory->addWorker(new CacheBustingWorker());
                 }
 

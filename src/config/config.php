@@ -13,11 +13,11 @@ return array(
   |
   */
 
+  'cachebusting' =>  true,
+
   'options' => array(
 
       'debug' => \Config::get('app.debug'),
-
-      'cachebusting' => \Config::get('app.debug'),
 
       'formulae_cache_dir' => storage_path().'/cache/assetic',
 

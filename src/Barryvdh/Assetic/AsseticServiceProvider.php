@@ -46,7 +46,7 @@ class AsseticServiceProvider extends ServiceProvider {
         $app['assetic'] = $app->share(function () use ($app) {
                 $app['assetic.path_to_web'] = $app['config']->get('laravel-assetic::config.path_to_web');
                 if( $app['config']->has('laravel-assetic::config.path_to_source')){
-                    $app['assetic.path_to_source'] = $app['config']->get('laravel-assetic::config.options.path_to_source');
+                    $app['assetic.path_to_source'] = $app['config']->get('laravel-assetic::config.path_to_source');
                 }
                 $app['assetic.options'] = $app['config']->get('laravel-assetic::config.options');
 

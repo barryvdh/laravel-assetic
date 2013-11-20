@@ -54,6 +54,8 @@ return array(
   },
 
   'path_to_web' => public_path(),
+  
+  //'path_to_source' => public_path(),  // When path_to_source is not set, it is the same as path_to_web
 
 
 );

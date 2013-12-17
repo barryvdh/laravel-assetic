@@ -52,13 +52,10 @@ class CheckedAssetWriter extends AssetWriter
                 );
 
             if(!file_exists($path) || filemtime($path) <= $asset->getLastModified()){
-                \Debugbar::info('Writing for '.$asset->getTargetPath());
                 static::write(
                     $path,
                     $asset->dump()
                 );
-            }else{
-                \Debugbar::info('Skipping for '.$asset->getTargetPath());
             }
         }
     }

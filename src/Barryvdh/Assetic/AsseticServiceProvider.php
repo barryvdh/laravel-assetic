@@ -87,7 +87,7 @@ class AsseticServiceProvider extends ServiceProvider {
          * @return \Assetic\AssetWriter
          */
         $app['assetic.asset_writer'] = $app->share(function () use ($app) {
-                return new AssetWriter($app['assetic.path_to_web']);
+                return new CheckedAssetWriter($app['assetic.path_to_web']);
             });
 
         /**

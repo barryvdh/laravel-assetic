@@ -173,7 +173,7 @@ class AsseticServiceProvider extends ServiceProvider {
                 });
 
             $app->extend('assetic.dumper', function ($helper, $app) {
-                    $helper->setTwig($app['twig'], $app['twig.loader.filesystem']);
+                    $helper->setTwig($app['twig'], $app['twig.loader']);
 
                     return $helper;
                 });

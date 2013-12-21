@@ -65,7 +65,7 @@ class Dumper
      * @param \Twig_Environment       $twig
      * @param \Twig_Loader_Filesystem $loader
      */
-    public function setTwig(\Twig_Environment $twig, \Twig_Loader_Filesystem $loader)
+    public function setTwig(\Twig_Environment $twig, \Twig_LoaderInterface $loader)
     {
         $this->twig   = $twig;
         $this->loader = $loader;

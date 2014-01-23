@@ -45,7 +45,7 @@ class AsseticBuildCommand extends Command
         $app = $this->laravel;
 
         // Boot assetic
-//        $assetic = $app['assetic'];
+        $assetic = $app['assetic'];
 
         $helper = $app['assetic.dumper'];
         if (isset($app['twig'])) {

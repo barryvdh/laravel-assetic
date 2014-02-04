@@ -162,23 +162,6 @@ class AsseticServiceProvider extends ServiceProvider {
                 );
             });
 
-        if (isset($app['twig'])) {
-
-           $app['twig']->addExtension(new AsseticExtension($app['assetic']));
-
-            $app->extend('assetic.lazy_asset_manager', function ($am, $app) {
-                    $am->setLoader('twig', new TwigFormulaLoader($app['twig']));
-
-                    return $am;
-                });
-
-            $app->extend('assetic.dumper', function ($helper, $app) {
-                    $helper->setTwig($app['twig'], $app['twig.loader']);
-
-                    return $helper;
-                });
-        }
-
         $app['command.assetic.build'] = $app->share(function($app)
             {
                 return new Console\AsseticBuildCommand();
@@ -191,6 +174,18 @@ class AsseticServiceProvider extends ServiceProvider {
         // Register our filters to use
         if (isset($app['assetic.filters']) && is_callable($app['assetic.filters'])) {
             $app['assetic.filters']($app['assetic.filter_manager']);
+        }
+        
+        if (isset($app['twig'])) {
+            $app['twig']->addExtension(new AsseticExtension($app['assetic']));
+            $app->extend('assetic.lazy_asset_manager', function ($am, $app) {
+                    $am->setLoader('twig', new TwigFormulaLoader($app['twig']));
+                    return $am;
+                });
+            $app->extend('assetic.dumper', function ($helper, $app) {
+                    $helper->setTwig($app['twig'], $app['twig.loader']);
+                    return $helper;
+                });
         }
 
         /**

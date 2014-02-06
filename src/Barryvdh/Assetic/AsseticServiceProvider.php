@@ -36,8 +36,6 @@ class AsseticServiceProvider extends ServiceProvider {
 	 */
 	public function register()
 	{
-        $this->package('barryvdh/laravel-assetic');
-
         $app = $this->app;
 
         /**
@@ -171,21 +169,25 @@ class AsseticServiceProvider extends ServiceProvider {
 
     public function boot(){
         $app = $this->app;
+        $this->package('barryvdh/laravel-assetic');
+
         // Register our filters to use
         if (isset($app['assetic.filters']) && is_callable($app['assetic.filters'])) {
             $app['assetic.filters']($app['assetic.filter_manager']);
         }
-        
+
         if (isset($app['twig'])) {
             $app['twig']->addExtension(new AsseticExtension($app['assetic']));
+            
             $app->extend('assetic.lazy_asset_manager', function ($am, $app) {
-                    $am->setLoader('twig', new TwigFormulaLoader($app['twig']));
-                    return $am;
-                });
+                $am->setLoader('twig', new TwigFormulaLoader($app['twig']));
+                return $am;
+            });
+
             $app->extend('assetic.dumper', function ($helper, $app) {
-                    $helper->setTwig($app['twig'], $app['twig.loader']);
-                    return $helper;
-                });
+                $helper->setTwig($app['twig'], $app['twig.loader']);
+                return $helper;
+            });
         }
 
         /**

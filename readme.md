@@ -11,7 +11,18 @@ Add this package to composer.json
         "barryvdh/laravel-assetic": "dev-master"
     }
     
-And run `composer update`. Then add the ServiceProvider to the providers array in app/config/app.php
+And run `composer update`. If you get the error, **barryvdh/laravel-assetic dev-master requires kriswallsmith/assetic ~1.2 -> no matching package found**, you might need to add or change your composer.json settings to the following:
+
+    {
+
+        ...
+        "minimum-stability": "dev",
+        "prefer-stable": true
+
+    }
+
+
+Then add the ServiceProvider to the providers array in app/config/app.php
     
     'providers' => array(
         ..

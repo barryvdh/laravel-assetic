@@ -51,7 +51,7 @@ class CheckedAssetWriter extends AssetWriter
                     $asset->getValues()
                 );
 
-            if(!file_exists($path) || filemtime($path) <= $asset->getLastModified()){
+            if (!is_dir($path) && (!file_exists($path) || filemtime($path) <= $asset->getLastModified())){
                 static::write(
                     $path,
                     $asset->dump()

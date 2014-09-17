@@ -8,7 +8,7 @@ Add this package to composer.json
 
     "require": {
         ..
-        "barryvdh/laravel-assetic": "dev-master"
+        "barryvdh/laravel-assetic": "0.1.x"
     }
     
 And run `composer update`. If you get the error, **barryvdh/laravel-assetic dev-master requires kriswallsmith/assetic ~1.2 -> no matching package found**, you might need to add or change your composer.json settings to the following:
